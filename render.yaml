@@ -1,0 +1,16 @@
+
+services:
+  - type: web
+    name: velozml
+    env: python
+    buildCommand: ""
+    startCommand: waitress-serve --port $PORT --call ml_api_flask_starter:app
+    envVars:
+      - key: FLASK_SECRET_KEY
+        value: tu_clave_segura
+      - key: ML_CLIENT_ID
+        value: tu_client_id
+      - key: ML_CLIENT_SECRET
+        value: tu_client_secret
+      - key: ML_REDIRECT_URI
+        value: https://app.tudominio.com/callback
