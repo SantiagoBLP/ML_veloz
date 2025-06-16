@@ -1,5 +1,6 @@
+
 # ml_api_flask_starter.py
-# Minimal Flask + OAuth 2.0 starter for MercadoLibre API (Ready for Railway deploy)
+# Adapted for deployment on Render
 
 from flask import Flask, redirect, request, session, jsonify
 import requests
@@ -11,7 +12,6 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "supersecret")
 
-# Config: Replace with your registered app credentials
 CLIENT_ID = os.environ.get("ML_CLIENT_ID")
 CLIENT_SECRET = os.environ.get("ML_CLIENT_SECRET")
 REDIRECT_URI = os.environ.get("ML_REDIRECT_URI")
@@ -64,4 +64,5 @@ def dashboard():
     return jsonify({"user_id": user_id, "items": items})
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
