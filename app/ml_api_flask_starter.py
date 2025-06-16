@@ -5,9 +5,7 @@
 from flask import Flask, redirect, request, session, jsonify
 import requests
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "supersecret")
